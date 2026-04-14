@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kathy Bate Designs — Care, Excellence and Integrity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ─────────────────────────────────────
+   FOUNDATION
+───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --parchment:  #F5F1EB;
+  --cream:      #EDE8DF;
+  --white:      #FDFAF6;
+  --ink:        #1C1916;
+  --ink-soft:   #3A362F;
+  --warm-gray:  #9C9088;
+  --bronze:     #A07840;
+  --bronze-lt:  #BF9B62;
+  --bronze-dim: rgba(160,120,64,.12);
+  --border:     rgba(28,25,22,.08);
+  --border-md:  rgba(28,25,22,.13);
+
+  --fd: 'Cormorant Garamond', Georgia, serif;
+  --fb: 'Jost', 'Helvetica Neue', sans-serif;
+  --ease: cubic-bezier(.25,.1,.25,1);
+  --expo: cubic-bezier(.16,1,.3,1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--fb);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a   { text-decoration: none; color: inherit; }
+
+/* ─────────────────────────────────────
+   CURSOR
+───────────────────────────────────── */
+#cur {
+  position: fixed; top: 0; left: 0;
+  width: 7px; height: 7px;
+  background: var(--ink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  mix-blend-mode: multiply;
+  transition: width .3s var(--expo), height .3s var(--expo), opacity .3s;
+}
+#cur-ring {
+  position: fixed; top: 0; left: 0;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(28,25,22,.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+}
+#cur.hover  { width: 44px; height: 44px; opacity: .06; }
+
+/* ─────────────────────────────────────
+   PROGRESS BAR
+───────────────────────────────────── */
+#prog {
+  position: fixed; top: 0; left: 0;
+  height: 1px; width: 0;
+  background: var(--bronze);
+  z-index: 10001;
+  transition: width .1s linear;
+}
+
+/* ─────────────────────────────────────
+   AWARD STRIP  ← first element on page
+   Thin, elegant, refined. The first
+   thing the eye lands on.
+───────────────────────────────────── */
+.award-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--bronze-dim);
+  padding: .75rem clamp(1.5rem,5vw,5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.award-strip-center {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
+}
+
+.award-strip-item {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  font-family: var(--fb);
+  font-size: .58rem;
+  font-weight: 400;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  white-space: nowrap;
+}
+
+.award-strip-item::before {
+  content: '★';
+  font-size: .45rem;
+  color: var(--bronze-lt);
+}
+
+.award-strip-divider {
+  width: 1px;
+  height: 12px;
+  background: var(--bronze-dim);
+  flex-shrink: 0;
+}
+
+.award-strip-right {
+  font-family: var(--fb);
+  font-size: .54rem;
+  font-weight: 300;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem clamp(1.5rem,5vw,5rem);
+  background: rgba(245,241,235,.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition: padding .4s var(--ease);
+}
+
+.nav-logo {
+  font-family: var(--fd);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.nav-logo span {
+  display: block;
+  font-family: var(--fb);
+  font-size: .54rem;
+  font-weight: 300;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-top: 3px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.8rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: .62rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(28,25,22,.5);
+  position: relative;
+  transition: color .3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--bronze);
+  transition: width .4s var(--expo);
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  font-size: .62rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: .65rem 1.6rem;
+  border: 1px solid var(--ink);
+  transition: background .3s, color .3s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--parchment); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 4px;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px; height: 1px;
+  background: var(--ink);
+  transition: .3s;
+}
+
+/* Mobile nav */
+.mob-nav {
+  display: none;
+  position: fixed; inset: 0;
+  background: var(--parchment);
+  z-index: 990;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s var(--expo);
+}
+.mob-nav.open { opacity: 1; pointer-events: all; }
+.mob-nav a {
+  font-family: var(--fd);
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: .04em;
+  transition: color .3s;
+}
+.mob-nav a:hover { color: var(--bronze); }
+
+/* ─────────────────────────────────────
+   HERO
+───────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 92vh;
+  min-height: 620px;
+  overflow: hidden;
+}
+
+.hero-img {
+  position: absolute; inset: 0;
+  transform: scale(1.06);
+  transition: transform 8s var(--ease);
+}
+.hero-img.loaded { transform: scale(1); }
+
+.hero-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(.72);
+}
+
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(28,25,22,.72) 0%,
+    rgba(28,25,22,.12) 55%,
+    transparent 100%
+  );
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0 clamp(1.5rem,5vw,5rem) clamp(3rem,5vw,5rem);
+  z-index: 2;
+  max-width: 920px;
+}
+
+.hero-eyebrow {
+  font-size: .58rem;
+  font-weight: 400;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--bronze-lt);
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp .9s var(--expo) .3s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 22px; height: 1px;
+  background: var(--bronze-lt);
+  flex-shrink: 0;
+}
+
+.hero-headline {
+  font-family: var(--fd);
+  font-size: clamp(3.2rem,7.5vw,7.5rem);
+  font-weight: 300;
+  line-height: .93;
+  color: var(--white);
+  letter-spacing: -.01em;
+  margin-bottom: 2.2rem;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--bronze-lt);
+}
+
+.hero-line     { display: block; overflow: hidden; }
+.hero-word     { display: block; transform: translateY(110%); animation: slideUp 1.1s var(--expo) forwards; }
+.hero-line:nth-child(1) .hero-word { animation-delay: .15s; }
+.hero-line:nth-child(2) .hero-word { animation-delay: .28s; }
+.hero-line:nth-child(3) .hero-word { animation-delay: .42s; }
+
+.hero-foot {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp .9s var(--expo) .85s forwards;
+}
+
+.hero-desc {
+  font-size: .82rem;
+  font-weight: 300;
+  letter-spacing: .04em;
+  color: rgba(253,250,246,.55);
+  max-width: 260px;
+  line-height: 1.8;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .9rem;
+  font-size: .6rem;
+  font-weight: 400;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--white);
+  border-bottom: 1px solid rgba(253,250,246,.35);
+  padding-bottom: 5px;
+  white-space: nowrap;
+  transition: border-color .3s, gap .4s var(--expo);
+}
+.hero-cta:hover { border-color: var(--bronze-lt); gap: 1.5rem; }
+
+.hero-scroll {
+  position: absolute;
+  right: clamp(1.5rem,5vw,5rem);
+  bottom: clamp(3rem,5vw,5rem);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .7rem;
+  opacity: 0;
+  animation: fadeIn 1s var(--expo) 1.4s forwards;
+}
+.hero-scroll span {
+  font-size: .52rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(253,250,246,.35);
+  writing-mode: vertical-lr;
+}
+.scroll-tick {
+  width: 1px; height: 42px;
+  background: linear-gradient(to bottom, rgba(253,250,246,.35), transparent);
+  animation: scrollAnim 2.2s ease-in-out 1.8s infinite;
+}
+
+@keyframes slideUp  { to { transform: translateY(0); } }
+@keyframes fadeUp   { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn   { to { opacity: 1; } }
+@keyframes scrollAnim {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ─────────────────────────────────────
+   MARQUEE
+───────────────────────────────────── */
+.marquee {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  padding: .9rem 0;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem;
+  font-size: .58rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  white-space: nowrap;
+}
+.marquee-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--bronze);
+  flex-shrink: 0;
+}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ─────────────────────────────────────
+   SHARED UTILITIES
+───────────────────────────────────── */
+.eyebrow {
+  font-size: .58rem;
+  font-weight: 400;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 26px; height: 1px;
+  background: var(--bronze);
+  flex-shrink: 0;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .95s var(--expo), transform .95s var(--expo);
+}
+.reveal.vis { opacity: 1; transform: none; }
+.d1 { transition-delay: .1s; }
+.d2 { transition-delay: .2s; }
+.d3 { transition-delay: .32s; }
+.d4 { transition-delay: .44s; }
+
+/* ─────────────────────────────────────
+   ABOUT
+───────────────────────────────────── */
+.about {
+  padding: 9rem clamp(1.5rem,5vw,5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7rem;
+  align-items: start;
+}
+
+.about-left .eyebrow { margin-bottom: 2.8rem; }
+
+.about-statement {
+  font-family: var(--fd);
+  font-size: clamp(2rem,3.2vw,3.2rem);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: -.01em;
+  max-width: 460px;
+}
+.about-statement em { font-style: italic; color: var(--bronze); }
+
+.about-right { padding-top: 3.5rem; }
+
+.about-body {
+  font-size: .88rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  margin-bottom: 1.6rem;
+  max-width: 420px;
+}
+
+.about-sig {
+  font-family: var(--fd);
+  font-size: 1.85rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--bronze);
+  margin-bottom: .2rem;
+}
+.about-sig-sub {
+  font-size: .58rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: 3rem;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+.stat-n {
+  font-family: var(--fd);
+  font-size: 2.6rem;
+  font-weight: 300;
+  letter-spacing: -.02em;
+  line-height: 1;
+  margin-bottom: .35rem;
+}
+.stat-l {
+  font-size: .6rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  line-height: 1.5;
+}
+
+/* ─────────────────────────────────────
+   PROJECTS GRID
+───────────────────────────────────── */
+.projects { padding: 0 clamp(1.5rem,5vw,5rem) 9rem; }
+
+.proj-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 4.5rem;
+}
+.proj-title {
+  font-family: var(--fd);
+  font-size: clamp(2.4rem,4vw,4.5rem);
+  font-weight: 300;
+  line-height: .95;
+  letter-spacing: -.01em;
+}
+.proj-link {
+  font-size: .6rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+  transition: color .3s, border-color .3s;
+  margin-bottom: .4rem;
+  white-space: nowrap;
+}
+.proj-link:hover { color: var(--ink); border-color: var(--bronze); }
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.2rem;
+}
+
+.pc { position: relative; overflow: hidden; background: var(--cream); }
+.pc:nth-child(1) { grid-column: 1/7;  grid-row: 1; aspect-ratio: 4/3; }
+.pc:nth-child(2) { grid-column: 7/13; grid-row: 1; aspect-ratio: 3/4; }
+.pc:nth-child(3) { grid-column: 1/5;  grid-row: 2; aspect-ratio: 3/4; }
+.pc:nth-child(4) { grid-column: 5/10; grid-row: 2; aspect-ratio: 4/3; }
+.pc:nth-child(5) { grid-column: 10/13;grid-row: 2; aspect-ratio: 1;   }
+
+.pc img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(.9) saturate(.95);
+  transition: transform .9s var(--expo), filter .6s;
+}
+.pc:hover img { transform: scale(1.05); filter: brightness(.68) saturate(.82); }
+
+.pc-info {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.8rem;
+  background: linear-gradient(to top, rgba(28,25,22,.78) 0%, transparent 58%);
+  opacity: 0;
+  transition: opacity .5s;
+}
+.pc:hover .pc-info { opacity: 1; }
+
+.pc-cat {
+  font-size: .56rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--bronze-lt);
+  margin-bottom: .4rem;
+}
+.pc-name {
+  font-family: var(--fd);
+  font-size: clamp(1.1rem,1.8vw,1.6rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.pc-num {
+  position: absolute;
+  top: 1.2rem; left: 1.4rem;
+  font-family: var(--fd);
+  font-size: .9rem;
+  font-style: italic;
+  color: rgba(253,250,246,.35);
+  transition: color .4s;
+}
+.pc:hover .pc-num { color: var(--bronze-lt); }
+
+/* ─────────────────────────────────────
+   PORTFOLIO HORIZONTAL
+───────────────────────────────────── */
+.portfolio {
+  background: var(--ink);
+  padding: 8rem 0;
+  overflow: hidden;
+}
+.port-hdr {
+  padding: 0 clamp(1.5rem,5vw,5rem) 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.port-title {
+  font-family: var(--fd);
+  font-size: clamp(2.4rem,4.5vw,5rem);
+  font-weight: 300;
+  color: var(--parchment);
+  letter-spacing: -.02em;
+  line-height: .93;
+}
+.port-title em { font-style: italic; color: var(--bronze-lt); }
+.port-eyebrow {
+  color: rgba(245,241,235,.3);
+  margin-bottom: 1rem;
+}
+.port-eyebrow::before { background: var(--bronze); }
+
+.port-sub {
+  font-size: .68rem;
+  font-weight: 300;
+  letter-spacing: .1em;
+  color: rgba(245,241,235,.3);
+  max-width: 200px;
+  text-align: right;
+  line-height: 1.75;
+}
+
+.port-track {
+  display: flex;
+  gap: 3px;
+  padding: 0 clamp(1.5rem,5vw,5rem);
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
+  height: 620px;
+  align-items: flex-start;
+}
+.port-track::-webkit-scrollbar { display: none; }
+.port-track:active { cursor: grabbing; }
+
+.port-item { flex-shrink: 0; position: relative; overflow: hidden; }
+.port-item:nth-child(odd)  { width: 420px; height: 560px; }
+.port-item:nth-child(even) { width: 310px; height: 560px; margin-top: 60px; }
+
+.port-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(.78) saturate(.88);
+  transition: transform .8s var(--expo), filter .5s;
+}
+.port-item:hover img { transform: scale(1.04); filter: brightness(.58) saturate(.75); }
+
+.port-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2.2rem 1.8rem 1.8rem;
+  background: linear-gradient(to top, rgba(28,25,22,.78), transparent);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .4s, transform .5s var(--expo);
+}
+.port-item:hover .port-label { opacity: 1; transform: none; }
+.port-num {
+  font-size: .56rem;
+  letter-spacing: .24em;
+  color: var(--bronze-lt);
+  margin-bottom: .4rem;
+}
+.port-name {
+  font-family: var(--fd);
+  font-size: 1.35rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.1;
+}
+.port-idx {
+  position: absolute;
+  top: 1rem; left: 1.2rem;
+  font-family: var(--fd);
+  font-size: .85rem;
+  font-style: italic;
+  color: rgba(245,241,235,.28);
+}
+
+/* ─────────────────────────────────────
+   SERVICES
+───────────────────────────────────── */
+.services {
+  padding: 9rem clamp(1.5rem,5vw,5rem);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 7rem;
+}
+
+.svc-left .eyebrow { margin-bottom: 2.8rem; }
+.svc-heading {
+  font-family: var(--fd);
+  font-size: clamp(2rem,3vw,3.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  max-width: 280px;
+}
+.svc-heading em { font-style: italic; color: var(--bronze); }
+.svc-note {
+  font-size: .76rem;
+  font-weight: 300;
+  line-height: 1.82;
+  color: var(--warm-gray);
+  margin-top: 2rem;
+  max-width: 260px;
+}
+
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+
+.svc-item {
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  margin: -1px -1px 0 0;
+  transition: background .35s;
+  position: relative;
+  overflow: hidden;
+}
+.svc-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--bronze);
+  transition: width .5s var(--expo);
+}
+.svc-item:hover { background: var(--cream); }
+.svc-item:hover::after { width: 100%; }
+
+.svc-num {
+  font-size: .56rem;
+  letter-spacing: .3em;
+  color: var(--bronze);
+  margin-bottom: 1.1rem;
+}
+.svc-name {
+  font-family: var(--fd);
+  font-size: clamp(1.3rem,1.8vw,1.7rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: .8rem;
+}
+.svc-name em { font-style: italic; }
+.svc-desc {
+  font-size: .76rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--warm-gray);
+  margin-bottom: 1.1rem;
+}
+.svc-arr {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  transition: gap .4s var(--expo);
+}
+.svc-item:hover .svc-arr { gap: .9rem; }
+
+/* ─────────────────────────────────────
+   IMAGE BREAK
+───────────────────────────────────── */
+.img-break {
+  height: 65vh;
+  overflow: hidden;
+  position: relative;
+}
+.img-break img {
+  width: 100%; height: 120%;
+  object-fit: cover;
+  transform: translateY(-10%);
+  filter: brightness(.78) saturate(.88);
+}
+.img-break-caption {
+  position: absolute;
+  bottom: 2.8rem; right: clamp(1.5rem,5vw,5rem);
+  font-family: var(--fd);
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(253,250,246,.65);
+  letter-spacing: .04em;
+}
+
+/* ─────────────────────────────────────
+   AWARDS
+───────────────────────────────────── */
+.awards {
+  padding: 7rem clamp(1.5rem,5vw,5rem);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.awards-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+.awards-eyebrow {
+  font-size: .58rem;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: 1rem;
+}
+.awards-heading {
+  font-family: var(--fd);
+  font-size: clamp(2rem,3.5vw,3.4rem);
+  font-weight: 300;
+  letter-spacing: -.01em;
+}
+.awards-heading em { font-style: italic; color: var(--bronze); }
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+.award {
+  padding: 2.8rem 2.5rem;
+  border-right: 1px solid var(--border);
+  transition: background .3s;
+}
+.award:last-child { border-right: none; }
+.award:hover { background: var(--cream); }
+
+.award-year {
+  font-size: .58rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: .8rem;
+}
+.award-name {
+  font-family: var(--fd);
+  font-size: clamp(.95rem,1.4vw,1.3rem);
+  font-weight: 300;
+  line-height: 1.3;
+  margin-bottom: .4rem;
+}
+.award-org {
+  font-size: .66rem;
+  font-weight: 300;
+  color: var(--warm-gray);
+  letter-spacing: .08em;
+}
+
+/* ─────────────────────────────────────
+   AREAS
+───────────────────────────────────── */
+.areas {
+  padding: 5rem clamp(1.5rem,5vw,5rem);
+  background: var(--cream);
+}
+.areas-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 5rem;
+}
+.areas-label { flex-shrink: 0; }
+.areas-label .eyebrow { margin-bottom: 1.3rem; }
+.areas-title {
+  font-family: var(--fd);
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.2;
+  max-width: 180px;
+}
+.areas-title em { font-style: italic; color: var(--bronze); }
+.areas-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem 1.2rem;
+  flex: 1;
+  padding-top: .3rem;
+}
+.area-tag {
+  font-size: .65rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: color .3s, border-color .3s;
+}
+.area-tag:hover { color: var(--bronze); border-color: var(--bronze); }
+
+/* ─────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────── */
+.testimonials {
+  padding: 9rem clamp(1.5rem,5vw,5rem);
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 7rem;
+  align-items: center;
+}
+
+.t-left .eyebrow { margin-bottom: 2.5rem; }
+
+.t-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.t-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  font-family: var(--fb);
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  background: none;
+  border: none;
+  cursor: none;
+  text-align: left;
+  transition: color .3s;
+  padding: .2rem 0;
+}
+.t-nav-btn::before {
+  content: '';
+  display: block;
+  width: 14px; height: 1px;
+  background: var(--border-md);
+  flex-shrink: 0;
+  transition: width .4s var(--expo), background .3s;
+}
+.t-nav-btn.active { color: var(--ink); }
+.t-nav-btn.active::before { width: 28px; background: var(--bronze); }
+
+.t-right {
+  padding-left: 3.5rem;
+  border-left: 1px solid var(--border);
+}
+
+.t-quote {
+  font-family: var(--fd);
+  font-size: clamp(1.3rem,2.2vw,2.2rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin-bottom: 2.2rem;
+  transition: opacity .5s, transform .5s var(--expo);
+}
+.t-author-name {
+  font-size: .7rem;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: .3rem;
+}
+.t-author-role {
+  font-size: .62rem;
+  letter-spacing: .12em;
+  color: var(--warm-gray);
+}
+
+/* ─────────────────────────────────────
+   CONTACT
+───────────────────────────────────── */
+.contact {
+  padding: 9rem clamp(1.5rem,5vw,5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7rem;
+  align-items: start;
+}
+
+.contact-left .eyebrow { margin-bottom: 2.8rem; }
+
+.contact-heading {
+  font-family: var(--fd);
+  font-size: clamp(2.4rem,4vw,4.2rem);
+  font-weight: 300;
+  letter-spacing: -.01em;
+  line-height: 1.08;
+  margin-bottom: 1.8rem;
+}
+.contact-heading em { font-style: italic; color: var(--bronze); }
+
+.contact-body {
+  font-size: .86rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  max-width: 350px;
+  margin-bottom: 3rem;
+}
+
+.contact-details { display: flex; flex-direction: column; gap: 1.4rem; }
+.cd-label {
+  font-size: .56rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: .3rem;
+}
+.cd-value {
+  font-size: .86rem;
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: .04em;
+  line-height: 1.6;
+}
+.cd-value a { transition: color .3s; }
+.cd-value a:hover { color: var(--bronze); }
+
+.contact-form { display: flex; flex-direction: column; }
+
+.form-field {
+  border-bottom: 1px solid var(--border);
+  padding: 1.4rem 0;
+  transition: border-color .3s;
+}
+.form-field:focus-within { border-color: var(--bronze); }
+
+.form-field label {
+  display: block;
+  font-size: .56rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: .45rem;
+  transition: color .3s;
+}
+.form-field:focus-within label { color: var(--bronze); }
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--fb);
+  font-size: .88rem;
+  font-weight: 300;
+  color: var(--ink);
+  padding: 0;
+  resize: none;
+  cursor: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.form-field textarea { min-height: 72px; }
+.form-field select option { background: var(--parchment); }
+
+.form-btn {
+  margin-top: 2.8rem;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4rem;
+  font-family: var(--fb);
+  font-size: .62rem;
+  font-weight: 400;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 1.1rem 2.5rem;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: gap .4s var(--expo);
+}
+.form-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--bronze);
+  transform: translateX(-100%);
+  transition: transform .5s var(--expo);
+}
+.form-btn:hover::before { transform: translateX(0); }
+.form-btn:hover { gap: 1.9rem; }
+.form-btn span, .form-btn svg { position: relative; z-index: 1; }
+
+/* ─────────────────────────────────────
+   FOOTER
+───────────────────────────────────── */
+.footer {
+  background: var(--ink);
+  padding: 5.5rem clamp(1.5rem,5vw,5rem) 2.5rem;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 4.5rem;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.f-logo {
+  font-family: var(--fd);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  margin-bottom: .4rem;
+}
+.f-sub {
+  font-size: .54rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: rgba(245,241,235,.28);
+  margin-bottom: .5rem;
+}
+.f-tagline {
+  font-family: var(--fd);
+  font-size: .78rem;
+  font-style: italic;
+  color: var(--bronze);
+  margin-bottom: 1.4rem;
+}
+.f-brand-body {
+  font-size: .76rem;
+  font-weight: 300;
+  line-height: 1.78;
+  color: rgba(245,241,235,.35);
+  max-width: 230px;
+}
+.f-col-title {
+  font-size: .56rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(245,241,235,.26);
+  margin-bottom: 1.3rem;
+}
+.f-links { list-style: none; display: flex; flex-direction: column; gap: .72rem; }
+.f-links a {
+  font-size: .78rem;
+  font-weight: 300;
+  color: rgba(245,241,235,.5);
+  letter-spacing: .04em;
+  transition: color .3s;
+}
+.f-links a:hover { color: var(--parchment); }
+
+.f-social { display: flex; flex-direction: column; gap: .8rem; }
+.f-social a {
+  font-size: .66rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(245,241,235,.4);
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  transition: color .3s, gap .3s;
+}
+.f-social a::before {
+  content: '';
+  display: block;
+  width: 16px; height: 1px;
+  background: var(--bronze);
+  transition: width .4s var(--expo);
+}
+.f-social a:hover { color: var(--parchment); gap: 1.1rem; }
+.f-social a:hover::before { width: 26px; }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.f-copy { font-size: .6rem; color: rgba(245,241,235,.22); letter-spacing: .08em; }
+.f-legal { display: flex; gap: 1.8rem; }
+.f-legal a { font-size: .58rem; letter-spacing: .1em; color: rgba(245,241,235,.22); transition: color .3s; }
+.f-legal a:hover { color: rgba(245,241,235,.6); }
+
+/* ─────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────── */
+@media (max-width: 1100px) {
+  .about, .services, .contact {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    padding: 6rem clamp(1.5rem,4vw,3rem);
+  }
+  .about-right { padding-top: 0; }
+  .svc-heading { max-width: 100%; }
+  .testimonials { grid-template-columns: 1fr; gap: 3.5rem; padding: 6rem clamp(1.5rem,4vw,3rem); }
+  .t-right { padding-left: 0; border-left: none; border-top: 1px solid var(--border); padding-top: 3rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .areas-inner { flex-direction: column; gap: 2.5rem; }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
+  .mob-nav { display: flex; }
+  .hero-foot { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+  .hero-desc { display: none; }
+  .award-strip { justify-content: center; }
+  .award-strip-right { display: none; }
+  .award-strip-divider { display: none; }
+  .award-strip-center { gap: 1.2rem; }
+  .award-strip-item { font-size: .52rem; letter-spacing: .2em; }
+  .proj-header { flex-direction: column; align-items: flex-start; gap: .8rem; }
+  .proj-grid { grid-template-columns: 1fr 1fr; }
+  .pc:nth-child(1) { grid-column: 1/3; aspect-ratio: 4/3; }
+  .pc:nth-child(2) { grid-column: 1/2; grid-row: 2; aspect-ratio: 1; }
+  .pc:nth-child(3) { grid-column: 2/3; grid-row: 2; aspect-ratio: 1; }
+  .pc:nth-child(4) { grid-column: 1/3; grid-row: 3; aspect-ratio: 16/9; }
+  .pc:nth-child(5) { grid-column: 1/3; grid-row: 4; aspect-ratio: 16/9; }
+  .projects { padding: 1.5rem clamp(1.5rem,4vw,3rem) 6rem; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .awards-grid { grid-template-columns: 1fr; }
+  .award { border-right: none; border-bottom: 1px solid var(--border); }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .port-item:nth-child(odd)  { width: 290px; height: 390px; }
+  .port-item:nth-child(even) { width: 210px; height: 390px; margin-top: 50px; }
+  body { cursor: auto; }
+  #cur, #cur-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<div id="prog"></div>
+
+<!-- Mobile nav -->
+<nav class="mob-nav" id="mobNav">
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#services">Services</a>
+  <a href="#awards">Awards</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- ══════════════════════════════════
+     AWARD STRIP — absolute first element
+     The very first text on the page.
+     Elegant, understated, refined.
+═══════════════════════════════════ -->
+<div class="award-strip" role="banner">
+  <div class="award-strip-center">
+    <div class="award-strip-item">3× ASID First Place · 2019</div>
+    <div class="award-strip-divider"></div>
+    <div class="award-strip-item">Best Residential Kitchen</div>
+    <div class="award-strip-divider"></div>
+    <div class="award-strip-item">Best Commercial Restaurant · Two Categories</div>
+  </div>
+  <div class="award-strip-right">ASID Design Excellence Awards</div>
+</div>
+
+<!-- Navigation -->
+<header class="nav" id="mainNav">
+  <a href="#" class="nav-logo">
+    Kathy Bate Designs
+    <span>Care, Excellence and Integrity · ASID · CAPS · CID</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#awards">Awards</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contact Kathy</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-img" id="heroImgWrap">
+    <img
+      src="https://www.kathybatedesigns.com/wp-content/uploads/2019/07/ButtercuP.2.jpg"
+      alt="Award-Winning Buttercup Oakland Restaurant — Kathy Bate Designs"
+      id="heroImg"
+      onload="this.closest('.hero-img').classList.add('loaded')"
+    >
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Award-Winning Interior Design · Walnut Creek, CA · ASID · CAPS · CID</p>
+    <h1 class="hero-headline">
+      <span class="hero-line"><span class="hero-word">Spaces</span></span>
+      <span class="hero-line"><span class="hero-word"><em>crafted</em> to</span></span>
+      <span class="hero-line"><span class="hero-word">endure.</span></span>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-desc">Kitchens, baths &amp; restaurants designed with artisanal character for the San Francisco Bay Area.</p>
+      <a href="#projects" class="hero-cta">
+        View projects
+        <svg width="15" height="9" viewBox="0 0 15 9" fill="none">
+          <path d="M1 4.5H14M14 4.5L10.5 1M14 4.5L10.5 8" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-tick"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Kitchen Design</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Bath Remodels</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Restaurants &amp; Hospitality</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Eco-Friendly &amp; Sustainable</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ASID Professional Member</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>CAPS Certified</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>California Certified Interior Designer</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Bay Area · 40+ Years</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Kitchen Design</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Bath Remodels</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Restaurants &amp; Hospitality</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Eco-Friendly &amp; Sustainable</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ASID Professional Member</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>CAPS Certified</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>California Certified Interior Designer</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Bay Area · 40+ Years</span>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-left">
+    <p class="eyebrow reveal">About Kathy</p>
+    <h2 class="about-statement reveal d1">
+      Interiors <em>in celebration</em> of people gathering over food.
+    </h2>
+  </div>
+  <div class="about-right">
+    <p class="about-body reveal">With a portfolio spanning over 40 years, Kathy Bate is one of the Bay Area's most successful and seasoned design specialists. She is extremely knowledgeable about cabinetry, appliances, plumbing fixtures, furnishings, lighting, and finishes.</p>
+    <p class="about-body reveal d1">She uses eco-friendly and sustainable products and one-of-a-kind craftsmen options that make your kitchen or restaurant come to life as uniquely yours. Contractors, vendors, and architects appreciate Kathy's detailed CAD drawings and personal involvement, and gladly refer clients to her — and call on her to design their own homes.</p>
+    <p class="about-body reveal d2">Kathy has also shared her love of design as an instructor at Chabot College in Hayward and Los Positas College in Livermore, CA.</p>
+    <div class="reveal d2">
+      <div class="about-sig">Kathy Bate</div>
+      <div class="about-sig-sub">Principal Designer · ASID · CAPS · CID</div>
+    </div>
+    <div class="about-stats reveal d3">
+      <div><div class="stat-n">40+</div><div class="stat-l">Years in Practice</div></div>
+      <div><div class="stat-n">3×</div><div class="stat-l">ASID First Place Awards 2019</div></div>
+      <div><div class="stat-n">5★</div><div class="stat-l">Client Rating</div></div>
+      <div><div class="stat-n">ASID</div><div class="stat-l">Designer of Distinction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects">
+  <div class="proj-header">
+    <div>
+      <p class="eyebrow reveal">Selected Work</p>
+      <h2 class="proj-title reveal d1">Featured Projects</h2>
+    </div>
+    <a href="#portfolio" class="proj-link reveal d2">View full portfolio →</a>
+  </div>
+  <div class="proj-grid">
+
+    <div class="pc reveal">
+      <img src="https://www.kathybatedesigns.com/wp-content/uploads/2025/08/Clayton.1.jpg"
+           onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2025/08/Clayton.1-400x284.jpg'"
+           alt="Clayton Casual Family Kitchen">
+      <span class="pc-num">01</span>
+      <div class="pc-info">
+        <div class="pc-cat">Residential Kitchen · Clayton, CA</div>
+        <div class="pc-name">Clayton Casual Family Kitchen</div>
+      </div>
+    </div>
+
+    <div class="pc reveal d1">
+      <img src="https://www.kathybatedesigns.com/wp-content/uploads/2018/04/Web.Bath_.1.jpg"
+           onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2018/04/Web.Bath_.1-400x284.jpg'"
+           alt="Shanks Master Bath Remodel">
+      <span class="pc-num">02</span>
+      <div class="pc-info">
+        <div class="pc-cat">Master Bath · Pleasant Hill, CA</div>
+        <div class="pc-name">Shanks Master Bath</div>
+      </div>
+    </div>
+
+    <div class="pc reveal d2">
+      <img src="https://www.kathybatedesigns.com/wp-content/uploads/2018/04/Web.Omi_.2.2.jpg"
+           onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2018/04/Web.Omi_.2.2-400x284.jpg'"
+           alt="Lafayette Sunset Loop Remodel">
+      <span class="pc-num">03</span>
+      <div class="pc-info">
+        <div class="pc-cat">Full Remodel · Lafayette, CA</div>
+        <div class="pc-name">Lafayette Sunset Loop</div>
+      </div>
+    </div>
+
+    <div class="pc reveal d1">
+      <img src="https://www.kathybatedesigns.com/wp-content/uploads/2020/01/Web.Atwal_.1.jpg"
+           onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2020/01/Web.Atwal_.1-400x284.jpg'"
+           alt="Danville Remodel">
+      <span class="pc-num">04</span>
+      <div class="pc-info">
+        <div class="pc-cat">Residential · Danville, CA</div>
+        <div class="pc-name">Danville Remodel</div>
+      </div>
+    </div>
+
+    <div class="pc reveal d2">
+      <img src="https://www.kathybatedesigns.com/wp-content/uploads/2025/01/Web.TerryS.2.jpg"
+           onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2025/01/Web.TerryS.2-400x284.jpg'"
+           alt="Marchbanks Townhouse Kitchen">
+      <span class="pc-num">05</span>
+      <div class="pc-info">
+        <div class="pc-cat">Kitchen · Bay Area</div>
+        <div class="pc-name">Marchbanks Townhouse</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section class="portfolio" id="portfolio">
+  <div class="port-hdr">
+    <div>
+      <p class="eyebrow port-eyebrow reveal">Full Portfolio</p>
+      <h2 class="port-title reveal d1">40 years of<br><em>remarkable work.</em></h2>
+    </div>
+    <p class="port-sub reveal d2">Drag to explore kitchens, baths, restaurants &amp; hospitality spaces across the Bay Area.</p>
+  </div>
+  <div class="port-track" id="portTrack">
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/2019/07/ButtercuP.2.jpg" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2019/07/ButtercuP.2-400x284.jpg'" alt="Buttercup Oakland"><div class="port-label"><div class="port-num">01</div><div class="port-name">Buttercup Oakland — Award-Winning</div></div><span class="port-idx">01</span></div>
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/ngg_featured/Samos.jpg" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/ngg_featured/Samos-400x284.jpg'" alt="Samos San Francisco"><div class="port-label"><div class="port-num">02</div><div class="port-name">Samos, San Francisco</div></div><span class="port-idx">02</span></div>
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/2020/01/1.jpg" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2020/01/1-400x284.jpg'" alt="Ocean Oyster Bar Union City"><div class="port-label"><div class="port-num">03</div><div class="port-name">Ocean Oyster Bar, Union City</div></div><span class="port-idx">03</span></div>
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/2020/01/Gamboa3.jpg" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2020/01/Gamboa3-400x284.jpg'" alt="Gamboa Kitchen San Ramon"><div class="port-label"><div class="port-num">04</div><div class="port-name">Gamboa Kitchen, San Ramon</div></div><span class="port-idx">04</span></div>
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/2021/02/Fairmont-Vanity.jpg" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2021/02/Fairmont-Vanity-400x284.jpg'" alt="Historic Martinez Bath"><div class="port-label"><div class="port-num">05</div><div class="port-name">Master Bath, Historic 1915 Martinez Home</div></div><span class="port-idx">05</span></div>
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/ngg_featured/tashiro10.jpg" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/ngg_featured/tashiro10-400x284.jpg'" alt="Moraga Kitchen and Bath"><div class="port-label"><div class="port-num">06</div><div class="port-name">Moraga Kitchen &amp; Bath</div></div><span class="port-idx">06</span></div>
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/2016/11/Buttercup.01.jpg" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2016/11/Buttercup.01-400x284.jpg'" alt="Buttercup Concord"><div class="port-label"><div class="port-num">07</div><div class="port-name">Buttercup, Concord</div></div><span class="port-idx">07</span></div>
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/2017/02/Kitchen1.jpg" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2017/02/Kitchen1-400x284.jpg'" alt="North Walnut Creek Kitchen"><div class="port-label"><div class="port-num">08</div><div class="port-name">North Walnut Creek Kitchen &amp; Bath</div></div><span class="port-idx">08</span></div>
+    <div class="port-item"><img src="https://www.kathybatedesigns.com/wp-content/uploads/2023/01/gallery-deck_0006_Layer-5.png" onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2023/01/gallery-deck_0006_Layer-5-400x284.png'" alt="Danville 2nd Floor"><div class="port-label"><div class="port-num">09</div><div class="port-name">Danville Remodel — 2nd Floor</div></div><span class="port-idx">09</span></div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="svc-left">
+    <p class="eyebrow reveal">What We Offer</p>
+    <h2 class="svc-heading reveal d1">Full-Service<br><em>Design</em><br>Expertise</h2>
+    <p class="svc-note reveal d2">Serving Alamo, Benicia, Blackhawk, Clayton, Concord, Danville, Diablo, Lafayette, Martinez, Moraga, Oakland, Orinda, Piedmont, Pleasant Hill, San Ramon, Walnut Creek &amp; Berkeley.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-item reveal"><div class="svc-num">01</div><div class="svc-name">Kitchen<br><em>Design</em></div><p class="svc-desc">Award-winning spatial planning, custom cabinetry, appliance and plumbing fixture selection, lighting, and artisan finishes — unique, functional, built around your budget.</p><a href="#contact" class="svc-arr">Inquire <svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5H12M12 4.5L8.5 1M12 4.5L8.5 8" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/></svg></a></div>
+    <div class="svc-item reveal d1"><div class="svc-num">02</div><div class="svc-name">Bathroom<br><em>Remodels</em></div><p class="svc-desc">Master baths and full remodels with custom vanities, built-ins, tile work, color consulting, and complete project coordination from concept through installation.</p><a href="#contact" class="svc-arr">Inquire <svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5H12M12 4.5L8.5 1M12 4.5L8.5 8" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/></svg></a></div>
+    <div class="svc-item reveal d2"><div class="svc-num">03</div><div class="svc-name">Restaurants<br><em>&amp; Hospitality</em></div><p class="svc-desc">Vibrant, functional restaurant interiors with artisanal elements and unique space planning. Fully versed in ADA, Title 24, and Health Department requirements.</p><a href="#contact" class="svc-arr">Inquire <svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5H12M12 4.5L8.5 1M12 4.5L8.5 8" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/></svg></a></div>
+    <div class="svc-item reveal d3"><div class="svc-num">04</div><div class="svc-name">Aging-in-Place<br><em>(CAPS)</em></div><p class="svc-desc">CAPS-certified design — accessible, beautiful interiors that support independent living at every stage of life without compromising elegance or quality.</p><a href="#contact" class="svc-arr">Inquire <svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5H12M12 4.5L8.5 1M12 4.5L8.5 8" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/></svg></a></div>
+    <div class="svc-item reveal"><div class="svc-num">05</div><div class="svc-name">Full Home<br><em>Remodels</em></div><p class="svc-desc">Living rooms, dining rooms, custom home bars, wine cellars, fireplace mantels, and floor plans — complete interiors designed as a single cohesive whole.</p><a href="#contact" class="svc-arr">Inquire <svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5H12M12 4.5L8.5 1M12 4.5L8.5 8" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/></svg></a></div>
+    <div class="svc-item reveal d1"><div class="svc-num">06</div><div class="svc-name">Design<br><em>Consulting</em></div><p class="svc-desc">Color consulting, space planning, furniture selection, drafting, and energy-efficient home solutions as a standalone service or as part of a full engagement.</p><a href="#contact" class="svc-arr">Inquire <svg width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M1 4.5H12M12 4.5L8.5 1M12 4.5L8.5 8" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/></svg></a></div>
+  </div>
+</section>
+
+<!-- Image break -->
+<div class="img-break" id="imgBreak">
+  <img src="https://www.kathybatedesigns.com/wp-content/uploads/2020/01/Gamboa3.jpg"
+       onerror="this.src='https://www.kathybatedesigns.com/wp-content/uploads/2020/01/Gamboa3-400x284.jpg'"
+       alt="Gamboa Kitchen, San Ramon" id="parallaxImg">
+  <div class="img-break-caption">One-of-a-kind craftsmen options that make your space uniquely yours.</div>
+</div>
+
+<!-- Awards -->
+<section class="awards" id="awards">
+  <div class="awards-header reveal">
+    <p class="awards-eyebrow">Recognition &amp; Credentials</p>
+    <h2 class="awards-heading"><em>Award-Winning</em> Design Excellence</h2>
+  </div>
+  <div class="awards-grid">
+    <div class="award reveal"><div class="award-year">2019 · First Place</div><div class="award-name">Best Residential Kitchen<br>Under 200 sq. ft.</div><div class="award-org">ASID Design Excellence Awards</div></div>
+    <div class="award reveal d1"><div class="award-year">2019 · First Place</div><div class="award-name">Best Commercial Restaurant<br>Under 3,000 sq. ft.</div><div class="award-org">ASID Design Excellence Awards</div></div>
+    <div class="award reveal d2"><div class="award-year">2019 · First Place</div><div class="award-name">Best Commercial Restaurant<br>3,000 – 6,000 sq. ft.</div><div class="award-org">ASID Design Excellence Awards</div></div>
+    <div class="award reveal"><div class="award-year">Recognition</div><div class="award-name">ASID Designer of<br>Distinction Award</div><div class="award-org">American Society of Interior Designers</div></div>
+    <div class="award reveal d1"><div class="award-year">Credential</div><div class="award-name">Certified Aging-in-Place<br>Specialist (CAPS)</div><div class="award-org">National Association of Home Builders</div></div>
+    <div class="award reveal d2"><div class="award-year">Credential</div><div class="award-name">California Certified<br>Interior Designer (CID)</div><div class="award-org">CA Council for Interior Design Certification</div></div>
+  </div>
+</section>
+
+<!-- Areas Served -->
+<section class="areas">
+  <div class="areas-inner">
+    <div class="areas-label">
+      <p class="eyebrow reveal">Where We Work</p>
+      <h3 class="areas-title reveal d1">Serving the <em>Bay Area</em></h3>
+    </div>
+    <div class="areas-tags reveal d2">
+      <span class="area-tag">Alamo</span><span class="area-tag">Benicia</span><span class="area-tag">Berkeley</span>
+      <span class="area-tag">Blackhawk</span><span class="area-tag">Clayton</span><span class="area-tag">Concord</span>
+      <span class="area-tag">Danville</span><span class="area-tag">Diablo</span><span class="area-tag">Lafayette</span>
+      <span class="area-tag">Martinez</span><span class="area-tag">Moraga</span><span class="area-tag">Oakland</span>
+      <span class="area-tag">Orinda</span><span class="area-tag">Piedmont</span><span class="area-tag">Pleasant Hill</span>
+      <span class="area-tag">San Ramon</span><span class="area-tag">Vine Hill</span><span class="area-tag">Waldon</span>
+      <span class="area-tag">Walnut Creek</span>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="t-left">
+    <p class="eyebrow reveal">Client Reviews</p>
+    <div class="t-nav-list reveal d1" id="tNav">
+      <button class="t-nav-btn active" data-i="0">Jill T.</button>
+      <button class="t-nav-btn" data-i="1">Bruce Taylor</button>
+      <button class="t-nav-btn" data-i="2">Alan Stewart</button>
+      <button class="t-nav-btn" data-i="3">Emily S.</button>
+    </div>
+  </div>
+  <div class="t-right reveal d1">
+    <blockquote class="t-quote" id="tQuote">
+      "Kathy Bate designed a terrific kitchen which is not only beautiful but extremely functional. I came home from a six-week European vacation to a totally new kitchen that instantly became my favorite room in the house."
+    </blockquote>
+    <div id="tAuthor">
+      <p class="t-author-name" id="tName">Jill T.</p>
+      <p class="t-author-role" id="tRole">Kitchen Remodel · Bay Area</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <p class="eyebrow reveal">Begin a Conversation</p>
+    <h2 class="contact-heading reveal d1">Let's create<br>something<br><em>uniquely yours.</em></h2>
+    <p class="contact-body reveal d2">Kathy offers a complimentary 30-minute design consultation on Zoom for upcoming remodeling or restaurant projects. Realistic about your budget and personally involved from first sketch to final installation.</p>
+    <div class="contact-details reveal d3">
+      <div><div class="cd-label">Studio</div><div class="cd-value">2625 Oak Rd. #A, Walnut Creek, CA 94597</div></div>
+      <div><div class="cd-label">Phone</div><div class="cd-value"><a href="tel:9252127094">925-212-7094</a> (mobile) &nbsp;·&nbsp; <a href="tel:9253003622">925-300-3622</a> (office)</div></div>
+      <div><div class="cd-label">Email</div><div class="cd-value"><a href="mailto:kathy@kathybatedesigns.com">kathy@kathybatedesigns.com</a></div></div>
+      <div><div class="cd-label">Hours</div><div class="cd-value">Monday – Saturday</div></div>
+    </div>
+  </div>
+  <div class="contact-form reveal d1">
+    <div class="form-field"><label for="fn">Full Name</label><input type="text" id="fn" placeholder="Your name"></div>
+    <div class="form-field"><label for="fe">Email Address</label><input type="email" id="fe" placeholder="your@email.com"></div>
+    <div class="form-field"><label for="fp">Phone Number</label><input type="tel" id="fp" placeholder="(925) 000-0000"></div>
+    <div class="form-field">
+      <label for="ft">Project Type</label>
+      <select id="ft">
+        <option value="" disabled selected>Select a service</option>
+        <option>Kitchen Design</option>
+        <option>Bathroom Remodel</option>
+        <option>Restaurant / Hospitality</option>
+        <option>Full Home Remodel</option>
+        <option>Aging-in-Place (CAPS)</option>
+        <option>Design Consulting</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-field"><label for="fl">Project Location</label><input type="text" id="fl" placeholder="City, CA"></div>
+    <div class="form-field"><label for="fm">Tell Kathy About Your Project</label><textarea id="fm" placeholder="Share your vision, timeline, and any details that will help Kathy understand your project..."></textarea></div>
+    <button class="form-btn" id="submitBtn">
+      <span>Send Inquiry</span>
+      <svg width="15" height="9" viewBox="0 0 15 9" fill="none"><path d="M1 4.5H14M14 4.5L10.5 1M14 4.5L10.5 8" stroke="currentColor" stroke-width=".9" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="f-logo">Kathy Bate Designs</div>
+      <div class="f-sub">Walnut Creek, CA · ASID · CAPS · CID</div>
+      <div class="f-tagline">"Care, Excellence and Integrity"</div>
+      <p class="f-brand-body">Award-winning kitchen, bath, and restaurant design serving the San Francisco Bay Area for over 40 years.</p>
+    </div>
+    <div>
+      <p class="f-col-title">Navigate</p>
+      <ul class="f-links">
+        <li><a href="#about">About Kathy</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#portfolio">Full Portfolio</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#awards">Awards &amp; Credentials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="f-col-title">Services</p>
+      <ul class="f-links">
+        <li><a href="#services">Kitchen Design</a></li>
+        <li><a href="#services">Bathroom Remodels</a></li>
+        <li><a href="#services">Restaurants &amp; Hospitality</a></li>
+        <li><a href="#services">Full Home Remodels</a></li>
+        <li><a href="#services">Aging-in-Place · CAPS</a></li>
+        <li><a href="#services">Design Consulting</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="f-col-title">Connect</p>
+      <div class="f-social">
+        <a href="https://www.facebook.com/Kathy-Bate-Designs-102488529791962/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.linkedin.com/in/kathybate" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/kathybatedesigns/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.houzz.com/professionals/interior-designers-and-decorators/kathy-bate-asid-caps-pfvwus-pf~402747667" target="_blank" rel="noopener">Houzz</a>
+        <a href="https://www.yelp.com/biz/kathy-bate-designs-walnut-creek" target="_blank" rel="noopener">Yelp</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="f-copy">© 2025 Kathy Bate Designs · 2625 Oak Rd. #A, Walnut Creek, CA 94597 · 925-212-7094</p>
+    <div class="f-legal">
+      <a href="https://www.kathybatedesigns.com" target="_blank">kathybatedesigns.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const cur = document.getElementById('cur')
+const ring = document.getElementById('cur-ring')
+let mx=0,my=0,rx=0,ry=0
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px' })
+;(function loop(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop) })()
+document.querySelectorAll('a,button,.pc,.port-item,.svc-item,.t-nav-btn,.area-tag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('hover'))
+  el.addEventListener('mouseleave',()=>cur.classList.remove('hover'))
+})
+
+/* ── PROGRESS ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('prog').style.width=
+    (scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%'
+},{passive:true})
+
+/* ── MOBILE NAV ── */
+const toggle=document.getElementById('navToggle'), mob=document.getElementById('mobNav')
+let open=false
+toggle.addEventListener('click',()=>{
+  open=!open; mob.classList.toggle('open',open)
+  const[a,b,c]=toggle.children
+  a.style.transform=open?'rotate(45deg) translate(4px,4px)':''
+  b.style.opacity=open?'0':'1'
+  c.style.transform=open?'rotate(-45deg) translate(4px,-4px)':''
+})
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  open=false; mob.classList.remove('open')
+  const[a2,b2,c2]=toggle.children
+  a2.style.transform=c2.style.transform=''; b2.style.opacity='1'
+}))
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver((entries,o)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('vis'); o.unobserve(e.target) }})
+},{threshold:.1,rootMargin:'0px 0px -50px 0px'})
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))
+
+/* ── PARALLAX ── */
+const pImg=document.getElementById('parallaxImg'), ib=document.getElementById('imgBreak')
+window.addEventListener('scroll',()=>{
+  const r=ib.getBoundingClientRect()
+  if(r.bottom>0&&r.top<innerHeight)
+    pImg.style.transform=`translateY(${-10+((innerHeight-r.top)/(innerHeight+r.height))*20}%)`
+},{passive:true})
+
+/* ── HERO PARALLAX ── */
+const heroImg=document.getElementById('heroImg')
+window.addEventListener('scroll',()=>{
+  if(heroImg) heroImg.style.transform=`translateY(${scrollY*.04}%)`
+},{passive:true})
+
+/* ── DRAG SCROLL PORTFOLIO ── */
+const track=document.getElementById('portTrack')
+let drag=false,sx=0,sl=0
+track.addEventListener('mousedown',e=>{ drag=true; sx=e.pageX-track.offsetLeft; sl=track.scrollLeft })
+window.addEventListener('mouseup',()=>drag=false)
+track.addEventListener('mousemove',e=>{ if(!drag)return; e.preventDefault(); track.scrollLeft=sl-(e.pageX-track.offsetLeft-sx)*1.2 })
+track.addEventListener('touchstart',e=>{ sx=e.touches[0].pageX-track.offsetLeft; sl=track.scrollLeft },{passive:true})
+track.addEventListener('touchmove',e=>{ track.scrollLeft=sl-(e.touches[0].pageX-track.offsetLeft-sx) },{passive:true})
+
+/* ── TESTIMONIALS ── */
+const T=[
+  {q:'"Kathy Bate designed a terrific kitchen which is not only beautiful but extremely functional. I came home from a six-week European vacation to a totally new kitchen that instantly became my favorite room in the house."',n:'Jill T.',r:'Kitchen Remodel · Bay Area'},
+  {q:'"I have worked on many restaurant design and building projects with Kathy Bate over the last twenty years. Kathy has a great talent for color, texture, furniture, lighting and layout. When I see Kathy\'s name on the project, I always know we are going to get a great result."',n:'Bruce Taylor',r:'President, Taylor Restaurant Systems, Inc.'},
+  {q:'"Everyone who comes to the house is instantly jealous of our kitchen and loves its design. Even 4 years later, there is not a thing we would have done differently."',n:'Alan Stewart',r:'Kitchen Remodel · Bay Area'},
+  {q:'"Kathy helped me with my 3 bathroom remodel. She was fantastic. She had great ideas, top notch contractors and she made it very easy for me. Highly recommend."',n:'Emily S.',r:'3-Bathroom Remodel · Bay Area'},
+]
+const qEl=document.getElementById('tQuote')
+const nEl=document.getElementById('tName')
+const rEl=document.getElementById('tRole')
+const navBtns=document.querySelectorAll('.t-nav-btn')
+let cur_t=0
+
+function setT(i){
+  qEl.style.opacity='0'; qEl.style.transform='translateY(10px)'
+  document.getElementById('tAuthor').style.opacity='0'
+  setTimeout(()=>{
+    qEl.textContent=T[i].q; nEl.textContent=T[i].n; rEl.textContent=T[i].r
+    qEl.style.transition='opacity .6s,transform .6s var(--expo)'
+    document.getElementById('tAuthor').style.transition='opacity .6s .1s'
+    qEl.style.opacity='1'; qEl.style.transform='none'
+    document.getElementById('tAuthor').style.opacity='1'
+  },280)
+  navBtns.forEach((b,j)=>b.classList.toggle('active',j===i))
+  cur_t=i
+}
+navBtns.forEach(b=>b.addEventListener('click',()=>setT(parseInt(b.dataset.i))))
+setInterval(()=>setT((cur_t+1)%T.length),7000)
+
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'))
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}) }
+  })
+})
+
+/* ── FORM ── */
+document.getElementById('submitBtn').addEventListener('click',function(){
+  this.querySelector('span').textContent='Message Sent ✓'
+  this.style.background='#A07840'; this.style.borderColor='#A07840'
+  setTimeout(()=>{ this.querySelector('span').textContent='Send Inquiry'; this.style.background=''; this.style.borderColor='' },4000)
+})
+</script>
+</body>
+</html>
